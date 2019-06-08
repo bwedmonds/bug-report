@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-// import BugEntry from './views/BugEntry.vue'
+// import BugDetails from './views/BugDetails.vue'
+
 
 Vue.use(Router)
 
@@ -15,7 +16,7 @@ export default new Router({
     // {
     //   path: '/bugs',
     //   name: 'bug',
-    //   component: BugEntry
+    //   component: BugDetails
     // },
   ]
 })

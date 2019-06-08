@@ -7,8 +7,27 @@
       </div>
     </div>
     <div class="row">
-      <!-- //bug list goes here -->
       <bug-entry />
+    </div>
+    <div class="row">
+      <!-- <bug-list /> -->
+      <div class="bug-list table-responsive">
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Bug</th>
+              <th scope="col">Description</th>
+              <th scope="col">Created By</th>
+              <th scope="col">Open/Closed</th>
+              <th scope="col">Created On:</th>
+              <th scope="col">Closed On:</th>
+            </tr>
+          </thead>
+          <bug-list v-for="bug in bugs" :key="bug._id" :bug="bug"></bug-list>
+        </table>
+      </div>
+
     </div>
   </div>
 </template>
@@ -16,11 +35,18 @@
 <script>
   // @ is an alias to /src
   import BugEntry from '@/components/BugEntry.vue'
+  import BugList from '@/components/BugList.vue'
 
   export default {
     name: 'home',
+    computed: {
+      bugs() {
+        return this.$store.state.bugs
+      }
+    },
     components: {
-      BugEntry
+      BugEntry,
+      BugList
     }
   }
 </script>

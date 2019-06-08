@@ -8,5 +8,9 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: function (h) { return h(App) }
+  render: function (h) { return h(App) },
+  mounted() {
+    // make http requests for data here that your application is dependent upon on initial load
+    store.dispatch('getBugs')
+  }
 }).$mount('#app')
