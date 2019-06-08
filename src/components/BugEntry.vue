@@ -6,7 +6,7 @@
         </input>
       </div>
 
-      <div id="input-group-2" label="Bug Details" label-for="input-2">
+      <div id="input-group-2" label="Bug Description" label-for="input-2">
         <input id="input-2" type="text" v-model="bug.description" required placeholder="Bug details"></input>
       </div>
 

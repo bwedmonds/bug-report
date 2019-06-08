@@ -45,10 +45,12 @@ export default new Vuex.Store({
         console.error(e)
       }
     },
-    async getDetails({ commit, dispatch }) {
+    async getDetailsById({ commit, dispatch }, id) {
       try {
         let res = await _api.get('bugs/:id')
         commit('setDetails', res.data.results._id)
+        console.log(res.data.results._id)
+        router.push({ name: 'details', params: { id: res.data.results._id } })
       }
       catch (e) {
         console.error(e)
