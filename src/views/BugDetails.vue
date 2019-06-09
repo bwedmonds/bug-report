@@ -26,12 +26,12 @@
 
   export default {
     name: 'bugDetails',
-    props: ["bug"],
+    props: ["id"],
     data() {
       return {}
     },
     mounted() {
-      this.$store.dispatch('getBugById', this.$route.params._id)
+      this.$store.dispatch('getBugById', this.id)
     },
     computed: {
       bug() {
