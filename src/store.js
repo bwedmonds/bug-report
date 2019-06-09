@@ -13,7 +13,7 @@ export default new Vuex.Store({
   state: {
     bug: {},
     bugs: [],
-    details: {},
+    // details: {},
   },
   mutations: {
     setBug(state, data) {
@@ -22,9 +22,9 @@ export default new Vuex.Store({
     setBugs(state, data) {
       state.bugs = data
     },
-    setDetails(state, data) {
-      state.details = data
-    }
+    // setDetails(state, data) {
+    //   state.details = data
+    // }
   },
   actions: {
     async createBug({ commit, dispatch }, data) {
@@ -45,12 +45,11 @@ export default new Vuex.Store({
         console.error(e)
       }
     },
-    async getDetailsById({ commit, dispatch }, id) {
+    async getBugById({ commit, dispatch }, id) {
       try {
-        let res = await _api.get('bugs/:id')
-        commit('setDetails', res.data.results._id)
-        console.log(res.data.results._id)
-        router.push({ name: 'details', params: { id: res.data.results._id } })
+        let res = await _api.get('/bugs/:id')
+        commit('setBug', res.data.results._id)
+        console.log(res.data.results)
       }
       catch (e) {
         console.error(e)

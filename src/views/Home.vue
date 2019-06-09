@@ -22,6 +22,7 @@
               <th scope="col">Open/Closed</th>
               <th scope="col">Created On:</th>
               <th scope="col">Closed On:</th>
+              <th scope="col">Details</th>
             </tr>
           </thead>
           <bug-list v-for="bug in bugs" :key="bug._id" :bug="bug"></bug-list>

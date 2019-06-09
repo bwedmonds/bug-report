@@ -1,8 +1,7 @@
 <template>
   <tbody>
-    <tr v-for="bug in details">
+    <tr>
       <th scope="row">
-        <router-link :to="'/bugs/' + bug._id" @click="getDetailsById">{{bug._id}}</router-link>
       </th>
       <td>{{bug.title}}</td>
       <td>{{bug.description}}</td>
@@ -10,27 +9,27 @@
       <td>{{bug.closed}}</td>
       <td>{{bug.createdAt}}</td>
       <td>for closed date later</td>
+      <td>
+        <router-link :to="{ name: 'bugDetails', params: { id: bug._id}}">
+          <button type="button" class="btn btn-info">Get Details</button>
+        </router-link>
+      </td>
     </tr>
   </tbody>
 </template>
 
 <script>
-  import Details from '@/components/Details.vue'
+  // import Details from '@/components/Details.vue'
 
 
   export default {
-    name: "bugList",
+    name: " bugList",
     props: ["bug"],
-    data() {
-      return {}
-    },
+    data() { return {} },
     computed: {},
     methods: {},
     components: {}
-  }
-</script>
-
-
+  } </script>
 <style>
 
 </style>
