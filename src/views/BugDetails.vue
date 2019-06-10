@@ -20,17 +20,17 @@
       </div>
     </div>
     <div class="row bg-light justify-content-center" v-if="!bug.closed">
-      <form @submit.prevent="createNote" class="form-inline">
+      <form @submit.prevent="createNote" @reset="onReset" class="form-inline">
         <input type="text" placeholder="Add a note" v-model="addedNote.content" class="form-control mx-1">
         <input type="text" placeholder="Created By" v-model="addedNote.creator" class="form-control mx-1">
         <button type="submit" class="btn btn-primary">Add Note</button>
+        <button type="reset" class="btn btn-secondary">Reset form</button>
       </form>
     </div>
     <div class="row">
       <!-- add edit bug here  -->
     </div>
-    <div class="row">
-      <!-- add form syntax for notes here  -->
+    <div class="row justify-content-center">
       <notes v-for="note in notes" :note="note"></notes>
     </div>
   </div>
@@ -68,6 +68,20 @@
         }
         this.$store.dispatch('createNote', this.addedNote)
       },
+      deleteNote() {
+        this.$store.dispatch('deleteNote', this.addedNote)
+      },
+      onReset(evt) {
+        evt.preventDefault()
+        // Reset form values
+        this.addedNote.content = ''
+        this.addedNote.creator = ''
+        // Trick to reset/clear native browser form validation state
+        this.show = false
+        this.$nextTick(() => {
+          this.show = true
+        })
+      }
     },
     computed: {
       bug() {

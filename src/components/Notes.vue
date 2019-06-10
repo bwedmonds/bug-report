@@ -1,12 +1,11 @@
 <template>
-  <div class="notes">
+  <div class="notes col-3 justify-content-center">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Bug Note</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{note.creator}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Created by: {{note.creator}}</h6>
         <p class="card-text">{{note.content}}</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+        <button type="button" class="btn btn-warning" @click="deleteNote">Delete Note</button>
       </div>
     </div>
   </div>
@@ -25,9 +24,9 @@
       }
     },
     methods: {
-      // createBug() {
-      //   this.$store.dispatch('createBug', this.bug)
-      // },
+      deleteNote() {
+        this.$store.dispatch('deleteNote', this.note)
+      },
 
     }
   }
