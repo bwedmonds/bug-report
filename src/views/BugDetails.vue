@@ -38,7 +38,7 @@
 
 <script>
   // @ is an alias to /src
-  // import Notes from '@/components/Notes.vue'
+  import Notes from '@/components/Notes.vue'
 
   export default {
     name: 'bugDetails',
@@ -48,19 +48,25 @@
         addedNote: {
           content: '',
           creator: '',
-          bug: this.id
+          bug: this.$route.params.id
         }
       }
     },
     mounted() {
       this.$store.dispatch('getBugById', this.id)
+      this.$store.dispatch('getNotes', this.id)
     },
     methods: {
       completeBug() {
         this.$store.dispatch('completeBug', this.id)
       },
       createNote() {
-        this.$store.dispatch('createNote', this.note)
+        let addedNote = {
+          creator: this.creator,
+          content: this.content,
+          bug: this.bug._id
+        }
+        this.$store.dispatch('createNote', this.addedNote)
       },
     },
     computed: {
@@ -72,7 +78,7 @@
       }
     },
     components: {
-      // Notes
+      Notes
     }
   }
 </script>

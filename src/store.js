@@ -65,12 +65,14 @@ export default new Vuex.Store({
         console.error(e)
       }
     },
+
     // Note stuff starts here
+
     async createNote({ commit, dispatch }, payload) {
       try {
-        let res = await _api.post('bugs/' + payload.bug + '/notes', payload)
+        await _api.post('bugs/' + payload.bug + '/notes', payload)
         dispatch('getNotes', payload.bug)
-        console.log('note added', res)
+        console.log('note added')
       }
       catch (e) {
         console.error(e)
@@ -78,9 +80,9 @@ export default new Vuex.Store({
     },
     async getNotes({ commit, dispatch }, id) {
       try {
-        let res = await _api.get('bugs/' + id + '/notes')
-        dispatch('setNotes', res.data.results)
-        console.log('got all notes', res)
+        let res = await _api.get('bugs/' + id + '/notes');
+        commit('setNotes', res.data.results)
+        console.log('got all notes', res.data.results)
       }
       catch (e) {
         console.error(e)
