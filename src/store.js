@@ -91,7 +91,8 @@ export default new Vuex.Store({
     async deleteNote({ commit, dispatch }, payload) {
       try {
         let res = await _api.delete('bugs/' + payload.bug + '/notes/' + payload._id)
-        commit('setNotes', payload)
+        //commit('setNotes', payload)
+        dispatch("getNotes", payload.bug)
         console.log('note deleted')
       }
       catch (e) {
