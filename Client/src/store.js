@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import router from './router.js'
+import router from './router.js.js'
 
 const _api = axios.create({
   baseURL: 'https://bcw-sandbox.herokuapp.com/api/bdawgtest'
