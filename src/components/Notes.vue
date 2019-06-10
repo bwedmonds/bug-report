@@ -22,16 +22,21 @@
 
 <script>
   export default {
-    name: "bug",
+    name: "notes",
+    props: ["note"],
     data() {
       return {
-        bug: {
+        note: {
           title: '',
-          description: '',
+          content: '',
           creator: '',
-          closedDate: ''
         },
         show: true
+      }
+    },
+    computed: {
+      notes() {
+        return this.$store.state.notes
       }
     },
     methods: {

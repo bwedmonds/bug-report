@@ -15,12 +15,12 @@
         <table class="table table-hover">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">Id#</th>
               <th scope="col">Bug</th>
               <th scope="col">Description</th>
               <th scope="col">Created By</th>
-              <th scope="col">Open/Closed</th>
               <th scope="col">Created On:</th>
+              <th scope="col">Open/Closed</th>
               <th scope="col">Closed On:</th>
               <th scope="col">Details</th>
             </tr>

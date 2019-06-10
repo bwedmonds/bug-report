@@ -13,7 +13,7 @@ export default new Vuex.Store({
   state: {
     bug: {},
     bugs: [],
-    // details: {},
+    notes: [],
   },
   mutations: {
     setBug(state, data) {
@@ -22,9 +22,9 @@ export default new Vuex.Store({
     setBugs(state, data) {
       state.bugs = data
     },
-    // setDetails(state, data) {
-    //   state.details = data
-    // }
+    setNotes(state, data) {
+      state.notes = data
+    }
   },
   actions: {
     async createBug({ commit, dispatch }, data) {
@@ -55,5 +55,44 @@ export default new Vuex.Store({
         console.error(e)
       }
     },
+    async completeBug({ commit, dispatch }, id) {
+      try {
+        let res = await _api.delete('bugs/' + id)
+        commit('setBug', res.data.results)
+        console.log(res.data.results)
+      }
+      catch (e) {
+        console.error(e)
+      }
+    },
+    // Note stuff starts here
+    async createNote({ commit, dispatch }, payload) {
+      try {
+        let res = await _api.post('bugs/' + payload.bug + '/notes', payload)
+        dispatch('getNotes', payload.bug)
+        console.log('successfully added note', res)
+      }
+      catch (e) {
+        console.error(e)
+      }
+    },
+    async getNotes({ commit, dispatch }, id) {
+      try {
+        let res = await _api.get('bugs/' + id + '/notes')
+        dispatch('setNotes', res.data.results)
+        console.log('successfully added note', res)
+      }
+      catch (e) {
+        console.error(e)
+      }
+    },
+  },
+  getters: {
+    Completed: (state) => (status) => {
+      if (status) {
+        return state.bugs.filter(b => b.closed == status)
+      }
+      return state.bugs
+    }
   }
 })
