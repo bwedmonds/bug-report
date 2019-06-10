@@ -11,16 +11,20 @@
             <h5 class="card-title">{{bug.description}}</h5>
             <p class="card-text">{{bug.creator}}</p>
           </div>
-          <div class="row">
-            <div class="col-12" v-if="!bug.closed">
-              <button @click="completeBug" class="btn btn-warning">Vermin Vanished</button>
-            </div>
-            <div class="col-12">
-              <note-entry />
-            </div>
-          </div>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-12" v-if="!bug.closed">
+        <button @click="completeBug" class="btn btn-warning">Vermin Vanished</button>
+      </div>
+    </div>
+    <div class="row bg-light justify-content-center" v-if="!bug.closed">
+      <form @submit.prevent="createNote" class="form-inline">
+        <input type="text" placeholder="Add a note" v-model="addedNote.content" class="form-control mx-1">
+        <input type="text" placeholder="Created By" v-model="addedNote.creator" class="form-control mx-1">
+        <button type="submit" class="btn btn-primary">Add Note</button>
+      </form>
     </div>
     <div class="row">
       <!-- add edit bug here  -->
@@ -35,13 +39,18 @@
 <script>
   // @ is an alias to /src
   // import Notes from '@/components/Notes.vue'
-  import NoteEntry from '@/components/NoteEntry.vue'
 
   export default {
     name: 'bugDetails',
     props: ["id"],
     data() {
-      return {}
+      return {
+        addedNote: {
+          content: '',
+          creator: '',
+          bug: this.id
+        }
+      }
     },
     mounted() {
       this.$store.dispatch('getBugById', this.id)
@@ -49,7 +58,10 @@
     methods: {
       completeBug() {
         this.$store.dispatch('completeBug', this.id)
-      }
+      },
+      createNote() {
+        this.$store.dispatch('createNote', this.note)
+      },
     },
     computed: {
       bug() {
@@ -60,8 +72,7 @@
       }
     },
     components: {
-      // Notes,
-      NoteEntry
+      // Notes
     }
   }
 </script>
